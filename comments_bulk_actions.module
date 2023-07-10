@@ -22,6 +22,11 @@
       'label' => t('Close comments'),
       'callback' => 'comments_bulk_actions_close_comments_action',
     ),
+    'comments_bulk_actions_hide_comments_action' => array(
+      'type' => 'node',
+      'label' => t('Hide comments'),
+      'callback' => 'comments_bulk_actions_hide_comments_action',
+    ),
   );
 }
 
@@ -41,7 +46,7 @@ function comments_bulk_actions_open_comments_action(Node $node, &$context) {
 }
 
 /**
- * Sets the comment status of a node to 0 (closed).
+ * Sets the comment status of a node to 1 (closed).
  *
  * @param Node $node
  *   A node entity.
@@ -51,6 +56,21 @@ function comments_bulk_actions_open_comments_action(Node $node, &$context) {
  * @ingroup actions
  */
 function comments_bulk_actions_close_comments_action(Node $node, &$context) {
+  $node->comment = 1;
+  $node->save();
+}
+
+/**
+ * Sets the comment status of a node to 0 (hidden).
+ *
+ * @param Node $node
+ *   A node entity.
+ * @param $context
+ *   Contextual information about the triggered action.
+ *
+ * @ingroup actions
+ */
+function comments_bulk_actions_hide_comments_action(Node $node, &$context) {
   $node->comment = 0;
   $node->save();
 }
