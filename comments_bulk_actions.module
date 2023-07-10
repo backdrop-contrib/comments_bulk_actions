@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * @file
+ * Functionality for Comment Bulk Actions.
+ */
+
+/**
+ * Implement hook_action_info()
+ *
+ * @return array
+ */
+ function comments_bulk_actions_action_info() {
+  return array(
+    'comments_bulk_actions_open_comments_action' => array(
+      'type' => 'node',
+      'label' => t('Open comments'),
+      'callback' => 'comments_bulk_actions_open_comments_action',
+    ),
+    'comments_bulk_actions_close_comments_action' => array(
+      'type' => 'node',
+      'label' => t('Close comments'),
+      'callback' => 'comments_bulk_actions_close_comments_action',
+    ),
+  );
+}
+
+/**
+ * Sets the comment status of a node to 2 (open).
+ *
+ * @param Node $node
+ *   A node entity.
+ * @param $context
+ *   Contextual information about the triggered action.
+ *
+ * @ingroup actions
+ */
+function comments_bulk_actions_open_comments_action(Node $node, &$context) {
+  $node->comment = 2;
+  $node->save();
+}
+
+/**
+ * Sets the comment status of a node to 0 (closed).
+ *
+ * @param Node $node
+ *   A node entity.
+ * @param $context
+ *   Contextual information about the triggered action.
+ *
+ * @ingroup actions
+ */
+function comments_bulk_actions_close_comments_action(Node $node, &$context) {
+  $node->comment = 0;
+  $node->save();
+}

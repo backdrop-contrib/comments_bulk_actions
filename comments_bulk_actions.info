@@ -1,0 +1,6 @@
+name = Comments Bulk Actions
+description = Provides actions to open and close node comments.
+backdrop = 1.x
+tags[] = Comments
+tags[] = Bulk operations
+type = module
